@@ -77,4 +77,10 @@ input#e-mail,
     display: none;
 }
 
+@import "sweetalert2";
+
+[data-bs-theme="dark"] {
+    @import "sweetalert2-dark";
+}
+
 @import "custom";
