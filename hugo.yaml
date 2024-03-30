@@ -9,7 +9,7 @@ module:
     - source: i18n
       target: i18n
     - source: static
-      target: "static/modules/ModsForHinode"
+      target: "static"
     - source: "assets/i18n_js"
       target: "assets/js/i18n"    
     - source: "assets/js"
