@@ -1,0 +1,53 @@
+# Comments
+- id: permalinkComment
+  translation:  Permalink to this comment
+- id: replyTo
+  translation: Reply to
+- id: replyToThread
+  translation: Reply to thread
+- id: noComments
+  translation: No comments yet. Your comment may be the first.
+- id: emailUseGravatarNotifications
+  translation: Your email address is used for <a href="https://gravatar.com" target="_blank" rel="noopener">Gravatar</a> image and notifications about new comments only.
+- id: emailUseGravatar
+  translation: Your email address is used for <a href="https://gravatar.com" target="_blank" rel="noopener">Gravatar</a> image only.
+- id: tellSomething
+  translation: Tell something
+- id: thanksForComment
+  translation: Thank you
+- id: commentSent
+  translation: Your comment has been sent and will be published after approval
+- id: nickname
+  translation: Nickname
+- id: commentPlaceholder
+  translation: Feel free to use **Markdown**.
+- id: commentNotify
+  translation: Notify me of new comments on this post
+- id: addComment
+  translation: Add comment
+
+# Authors page
+- id: authorsPosts
+  translation: Author's posts
+- id: authorsOfPosts
+  translation: Authors of posts
+
+# Filterlists
+- id: preview
+  translation: "Preview"
+- id: subscribe
+  translation: "Subscribe"
+- id: requiredColon
+  translation: "Required:"
+- id: manualSubscribePopupTitle
+  translation: Manual subscription to filter list
+- id: manualSubscribePopupDescription
+  translation: If for some reason you didn't see the message with the option to confirm subscription, then right-click the **"subscribe"** button again and select `uBlock Origin => Subscribe to filter list` from the context menu or paste filter list URL into place number 3.
+- id: copyLink
+  translation: Copy link
+- id: noInstructionsAgain
+  translation: Dont show these instructions again
+- id: uBOInstructionPart1
+  translation: Click settings button.
+- id: uBOInstructionPart2
+  translation: Activate the filter list tab, scroll to the end of the page and paste the filter list URL into the box at the bottom, then click apply.

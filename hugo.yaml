@@ -1,0 +1,18 @@
+module:
+  hugoVersion:
+    extended: true
+  imports:
+    - path: 'github.com/hugomods/giscus'
+  mounts:
+    - source: layouts
+      target: layouts
+    - source: i18n
+      target: i18n
+    - source: static
+      target: "static/modules/ModsForHinode"
+    - source: "assets/i18n_js"
+      target: "assets/js/i18n"    
+    - source: "assets/js"
+      target: "assets/js/modules/ModsForHinode"
+    - source: "assets/scss"
+      target: "assets/scss"

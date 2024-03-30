@@ -1,0 +1,80 @@
+/* Staticman Comments */
+
+#staticman-form:before {
+    display: block;
+    height: 90px;
+    margin-top: -90px;
+    visibility: hidden;
+    content: "";
+}
+
+@media (max-width: 768px) {
+    #staticman-form:before {
+        display: block;
+        height: 80px;
+        margin-top: -80px;
+        visibility: hidden;
+        content: "";
+    }
+}
+
+.post-comment {
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.post-comment-header {
+    margin-bottom: 20px;
+}
+
+.post-comment-avatar {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.post-comment-info {
+    display: inline-block;
+    margin-left: 20px;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.post-comment-field {
+    display: block;
+    font: inherit;
+    padding: 10px;
+    margin-top: 20px;
+    outline-color: #F76C5E;
+    width: 100%;
+}
+
+.post-comment-name {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+
+.text-center ul {
+    text-align: left;
+}
+
+p:has(+ ul) {
+    margin-bottom: 0;
+}
+
+div+ul {
+    text-align: left !important;
+}
+
+a, p {
+    overflow-wrap: break-word;
+}
+
+input#e-mail,
+#hidden_iframe {
+    display: none;
+}
+
+@import "custom";
