@@ -13,10 +13,9 @@
     {{- end -}}
 {{- end -}}
 
-{{- /* Validate module configuration */ -}}
-{{- if and .IsPage (not (in .Site.Params.modules.core "bootstrap")) -}}
-    {{- errorf "Bootstrap is a required module, please add it to 'modules.core' in your site parameters" -}}
-{{- end -}}
+{{- /* Initialize module configuration */ -}}
+{{- $modules := partial "utilities/InitModules.html" (dict "page" .) -}}
+{{- $.Scratch.Set "modules" $modules -}}
 
 {{- $fullCover := or (or (and .IsHome .Site.Params.home.fullCover) .Page.Params.fullCover) .Site.Params.main.footerBelowFold }}
 {{- $.Scratch.Set "fullCover" $fullCover -}}
@@ -29,6 +28,10 @@
 
 {{- /* Define main breakpoint */ -}}
 {{- $.Scratch.Set "breakpoint" (partial "utilities/GetBreakpoint.html") }}
+
+{{- /* Define base URL */ -}}
+{{ $lang := site.LanguageCode | default site.Language.Lang }}
+{{ $.Scratch.Set "baseURL" (strings.TrimSuffix (printf "%s/" $lang) site.Home.RelPermalink) }}
 
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}" class="no-js">
@@ -70,6 +73,7 @@
         {{ end }}
 
         {{- partial "footer/toast-container.html" . -}}
+        {{- partial "assets/symbols.html" . -}}
         {{ $uBOLangPath := "js/i18n/add-uBO-FL.js" }}
         {{- $uBOLang := resources.Get $uBOLangPath | resources.ExecuteAsTemplate (printf "%s.%s.js" "js/i18n/add-uBO-FL" .Site.Language.Lang ) . | minify | fingerprint -}}
         <script src="{{ $uBOLang.Permalink }}" integrity="{{ $uBOLang.Data.Integrity }}" crossorigin="anonymous" async></script>
