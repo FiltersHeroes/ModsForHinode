@@ -2,9 +2,11 @@
     <div class="container-xxl text-center">
         <small>
             <p class="pt-3">
+                {{ if .Site.Params.main.netlifyBadge }}
                 <a href="https://www.netlify.com">
                     <img src='{{ absURL "/images/netlify-color-accent.svg" }}' alt="Deploys by Netlify" />
                   </a>
+                {{ end }}
             </p>
             {{- $copyright := printf "%s © %s %s %s." (T "copyright") (dateFormat "2006" now) .Site.Title (T "rights") }}
             {{ cond (gt (len .Site.Copyright) 0) .Site.Copyright $copyright }}
