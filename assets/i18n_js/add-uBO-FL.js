@@ -1,7 +1,7 @@
 function createuBOModal(url) {
     if(localStorage.getItem('showManualSubscribe') !== "false")
     {
-        var clipboardBtn = `{{ partial "assets/button.html" (dict "id" "uBOSubClipboardBtn" "color" "info" "icon" "fas fa-clipboard" "outline" true) }}`;
+        var clipboardBtn = `{{ partial "assets/button.html" (dict "id" "uBOSubClipboardBtn" "color" "info" "icon" "fas clipboard" "outline" true) }}`;
         Swal.fire({
             title: '{{ i18n "manualSubscribePopupTitle" }}',
             html:

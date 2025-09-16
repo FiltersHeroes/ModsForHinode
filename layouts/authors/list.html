@@ -13,7 +13,7 @@
 {{- else if eq $cols "5" }}{{ if $responsive }}{{ $colGrid = printf "row-cols-1 row-cols-%s-3 row-cols-%s-5" $breakpoint.prev $breakpoint.current }}{{ else }}{{ $colGrid = "row-cols-5" }}{{ end -}}
 {{ end -}}
 
-{{- $class := "border-0 card-zoom" -}}
+{{- $class := "card-zoom" -}}
 <div class="container-xxl p-4 px-xxl-0">
     {{ if and (not $page.IsHome) site.Params.navigation.breadcrumb }}
     <div>{{ partial "assets/breadcrumb.html" (dict "page" $page) }}</div>
@@ -42,14 +42,8 @@
 </div>
 
 <div class="container-xxl p-4 px-xxl-0">
-    <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
-        <div class="col-12 col-{{ $breakpoint.current }}-9">
-            <div class="row row-cols-1 row-cols-{{ $breakpoint.current }}-2">
-                <div class="col-12 col-{{ $breakpoint.current }}-9">
-                    {{ with i18n "authorsPosts" }}<p id="{{ anchorize . }}" class="display-4 mt-5">{{ . }}</p>{{ end }}
-                </div>
-            </div>
-        </div>
+    <div class="text-center hero-title col-12">
+        {{ with i18n "authorsPosts" }}<p id="{{ anchorize . }}" class="pt-1 display-5 border-bottom border-info mb-3">{{ . }}</p>{{ end }}
     </div>
 </div>
 <div class="container-fluid p-0">
@@ -71,5 +65,4 @@
         </div>
     </div>
 </div>
-<div class="container-fluid flex-fill"></div>
 {{ end }}

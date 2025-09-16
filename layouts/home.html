@@ -3,11 +3,8 @@
 "page" .
 "reusableDir" "top") 
 -}}
-{{- $sections := $.Scratch.Get "sections" -}}
-{{/* Display generated sections */}}
-{{ range $sections }}
-    {{ .content | safeHTML }}
-{{ end }}
+    {{- $blocks := $.Scratch.Get "blocks" -}}
+    {{ $blocks | safeHTML }}
 {{- partial "homeReusablePages" (dict 
 "page" .
 "reusableDir" "bottom") 

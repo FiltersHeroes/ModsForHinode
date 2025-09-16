@@ -1,29 +1,28 @@
-<!-- TODO: replace scratch with dict -->
+{{/* TODO: replace scratch with dict */}}
 
-<!-- Adapted from doks -->
-{{ with .Title -}}
-    {{ $.Scratch.Set "title" . -}}
-{{ else -}}
-    {{ $.Scratch.Set "title" .Site.Title -}}
-{{ end -}}
+{{/* Adapted from doks */}}
+{{ with .Params.meta.title }}
+    {{ $title := . }}
+    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+    {{ $.Scratch.Set "title" $title -}}
+{{ else }}
+    {{ $title := .Title | default .Site.Title }}
+    {{ if site.Params.main.titleCase }}{{ $title = title $title }}{{ end }}
+    {{ $.Scratch.Set "title" $title -}}
+{{ end }}
 
-{{ $description := or (partial "utilities/GetDescription.html" (dict "page" .)) .Site.Params.main.description }}
+{{ $description := or (partial "utilities/GetDescription.html" (dict "page" . "meta" true)) .Site.Params.main.description }}
 {{ if gt (strings.RuneCount $description) 150 }}
     {{ $description = print (substr $description 0 150) "..." }}
 {{ end }}
 {{ $.Scratch.Set "description" $description -}}
 
-{{- $thumbnail := (or (and (reflect.IsMap .Params.Thumbnail) .Params.Thumbnail.url) .Params.Thumbnail) -}}
-{{ with $thumbnail -}}
-{{- $res := partial "utilities/GetImage.html" (dict "url" .) -}}
-{{- $img := "" -}}
-{{ with $res }}{{ $img = $res.resource }}{{ end }}
-{{ with $img -}}
-        {{ $dim := "1280x640" -}}
-        {{ $scaled := (.Fill (printf "%s jpg" $dim)) -}}
-        {{- $scaled = $scaled | resources.Copy (replace $img.RelPermalink ".jpg" (printf "-%s.jpg" $dim)) -}}
-        {{ $.Scratch.Set "thumbnail" ($scaled.Permalink | absURL) -}}
-    {{ end -}}
+{{- $thumbnail := "" -}}
+{{ if reflect.IsMap .Params.Thumbnail }}{{ $thumbnail = .Params.Thumbnail.url }}{{ else }}{{ $thumbnail = .Params.Thumbnail }}{{ end }}
+
+{{ if $thumbnail -}}
+    {{ $imgURL := index (partial "assets/helpers/image-dimension.html" (dict "src" $thumbnail "image-width" 1280 "image-height" 640 "page" .)) "target" }}
+    {{ $.Scratch.Set "thumbnail" ($imgURL | absURL) -}}
 {{ else -}}
     {{ with .Site.Params.schema.image.url -}}    
         {{ $.Scratch.Set "thumbnail" (. | absURL) -}}
@@ -47,7 +46,7 @@
 {{ if eq .Kind "404" -}}
     <meta name="robots" content="noindex, follow">
 {{ else }}
-  {{ with .Params.robots -}}
+  {{ with or .Params.robots .Params.meta.robots .Site.Params.meta.robots -}}
     <meta name="robots" content="{{ . }}">
   {{ else -}}
     <meta name="robots" content="index, follow">
@@ -56,10 +55,13 @@
   {{ end -}}
 {{ end -}}
 
+
 {{ if .Site.Params.webmaster_verifications }}
+
 {{ if .Site.Params.webmaster_verifications.google }}
 <meta name="google-site-verification" content="{{ .Site.Params.webmaster_verifications.google }}" />
 {{ end }}
+
 
 {{ if .Site.Params.webmaster_verifications.bing }}
 <meta name="msvalidate.01" content="{{ .Site.Params.webmaster_verifications.bing }}" />
@@ -69,14 +71,19 @@
 <meta name="alexaVerifyID" content="{{ .Site.Params.webmaster_verifications.alexa }}" />
 {{ end }}
 
+
 {{ if .Site.Params.webmaster_verifications.yandex }}
 <meta name="yandex-verification" content="{{ .Site.Params.webmaster_verifications.yandex }}" />
 {{ end }}
 
+
+
 {{ if .Site.Params.webmaster_verifications.baidu }}
 <meta name="baidu-site-verification" content="{{ .Site.Params.webmaster_verifications.baidu }}" />
 {{ end }}
+
 {{ end }}
+
 
     {{ if .IsHome -}}
         <title>{{ .Site.Title }} {{ if .Site.Params.head.tagline }} {{ .Site.Params.main.separator }} {{ .Site.Params.head.tagline }}{{ end }}</title>
@@ -86,16 +93,16 @@
 
     <meta name="description" content="{{ $.Scratch.Get "description" }}">
 
-{{ if $.Scratch.Get "paginator" }}
-    <link rel="canonical" href="{{ .Paginator.URL | absURL }}">
-    {{ if .Paginator.HasPrev -}}
-        <link rel="prev" href="{{ .Paginator.Prev.URL | absURL }}">
+
+{{ $paginator := $.Store.Get "paginator" }}
+{{ if $paginator }}
+    <link rel="canonical" href="{{ $paginator.URL | absURL }}">
+    {{ if $paginator.HasPrev -}}
+        <link rel="prev" href="{{ $paginator.Prev.URL | absURL }}">
     {{ end -}}
-    {{ if .Paginator.HasNext -}}
-        <link rel="next" href="{{ .Paginator.Next.URL | absURL }}">
+    {{ if $paginator.HasNext -}}
+        <link rel="next" href="{{ $paginator.Next.URL | absURL }}">
     {{ end -}}
-{{ else -}}
-    <link rel="canonical" href="{{ .Permalink }}">
 {{ end -}}
 
 {{ partial "head/opengraph.html" . }}

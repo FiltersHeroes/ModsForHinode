@@ -1,0 +1,43 @@
+{{- $breakpoint := .breakpoint -}}
+{{- $id := .id -}}
+{{- $fs := .fs | default 6 -}}
+
+<li class="nav-item dropdown me-auto">
+    <button class="nav-link dropdown-toggle d-{{ $breakpoint }}-none" role="button" data-bs-toggle="dropdown" aria-label="{{ T " colorMode" }}"
+        aria-expanded="false" id="{{ $id }}-theme">
+        <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" true) }}</span>&nbsp;{{ T "colorMode" }}
+        <span class="d-md-none"></span>
+    </button>
+
+    <button class="nav-link dropdown-toggle d-none d-{{ $breakpoint }}-block" role="button" data-bs-toggle="dropdown" 
+        aria-label="{{ T " colorMode" }}" aria-expanded="false">
+        <span class="theme-icon-active">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" false) }}</span>
+        <span class="d-md-none"></span>
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-end navbar-fs-{{ $fs }} navbar-{{ $breakpoint }}-fs">
+        <li>
+            <a class="dropdown-item" data-bs-theme-value="light">
+                <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas sun fa-fw" "spacing" false)
+                    }}</span>&nbsp;
+                {{- T "colorLight" }}
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" data-bs-theme-value="dark">
+                <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas moon fa-fw" "spacing" false)
+                    }}</span>&nbsp;
+                {{- T "colorDark" }}
+            </a>
+        </li>
+
+        <li>
+            <a class="dropdown-item active"
+                data-bs-theme-value="auto">
+                <span class="theme-icon">{{- partial "assets/icon.html" (dict "icon" "fas circle-half-stroke fa-fw"
+                    "spacing" false) }}</span>&nbsp;
+                {{- T "colorAuto" }}
+            </a>
+        </li>
+    </ul>
+</li>

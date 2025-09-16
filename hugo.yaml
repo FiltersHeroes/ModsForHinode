@@ -19,3 +19,6 @@ module:
       target: "assets/js/critical"
     - source: "assets/scss"
       target: "assets/scss"
+    - source: "component-library"
+      target: "data/structures"
+      includeFiles: ['**/*.bookshop.yml']
