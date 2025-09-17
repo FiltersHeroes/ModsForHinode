@@ -46,7 +46,7 @@
                 {{ .title | page.RenderString | safeHTML }}
         </h1>
     {{ else }}
-        <h2 id="{{ anchorize .title }}" class="pt-1 display-5 border-bottom border-info mb-3">
+        <h2 id="{{ anchorize .title }}" class="pt-1 display-5 border-bottom border-primary mb-3">
             {{ .title | page.RenderString | safeHTML }}
         </h2>
     {{ end }}
