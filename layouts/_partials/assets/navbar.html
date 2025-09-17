@@ -136,9 +136,13 @@
                 {{/* Insert the brand logo or name */}}
                 <div class="width-100 width-{{ $args.breakpoint }}-auto {{ if not $logo }}my-auto {{ end  }} {{ if eq $align "center" }}text-center{{ end }}">
                     <a class="navbar-brand d-inline-block" href="{{ site.Home.RelPermalink }}" aria-label="{{ T "home" }}">
+                        {{- if $logo -}}
                         {{ $width := partial "utilities/GetWidth.html" (dict "path" $logo "height" 30) }}
                         <img src="{{if $absoluteURL }}{{ absURL $logo }}{{ else }}{{ $logo }}{{ end }}" alt="{{ $title }} logo" height="30"{{ with $width }} width="{{ . }}"{{ end }}>
                         <span>{{ $title }}</span>
+                        {{- else -}}
+                        <div class="p-0 navbar-title-{{ $align }} fw-bold h-100">{{ $title }}</div>
+                        {{- end -}}
                     </a>
                 </div>
         
