@@ -77,6 +77,10 @@ input#e-mail,
     display: none;
 }
 
+.main {
+    min-height: initial;
+}
+
 @import "sweetalert2";
 
 @import "custom";
