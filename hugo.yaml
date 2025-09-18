@@ -21,4 +21,4 @@ module:
       target: "assets/scss"
     - source: "component-library"
       target: "data/structures"
-      includeFiles: ['**/*.bookshop.yml']
+      includeFiles: ['**/*.bookshop.yml', '*.yaml']
